@@ -2,7 +2,7 @@ import json
 import urllib.request
 import web3
 
-from etherscan import Etherscan
+#from etherscan import Etherscan
 
 from web3 import Web3
 from ens.auto import ENS
@@ -27,7 +27,7 @@ my_config = {
 }
 
 # Initializing Etherscan API
-eth = Etherscan(eth_key)
+#eth = Etherscan(eth_key)
 
 # Initialising WEB3 ENS
 w3 = Web3(Web3.HTTPProvider("https://mainnet.infura.io/v3/e1aff836d3a64d6aba0f028217da381f"))
