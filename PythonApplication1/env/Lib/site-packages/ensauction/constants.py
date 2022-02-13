@@ -1,0 +1,3 @@
+EMPTY_SHA3_BYTES = b'\0' * 32
+
+EMPTY_ADDR_HEX = '0x' + '00' * 20
