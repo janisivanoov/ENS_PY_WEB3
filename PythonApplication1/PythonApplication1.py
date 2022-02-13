@@ -87,9 +87,6 @@ def updateName(domain, address, block):
         finally:
             my_cn.commit()
         
-   
-
-
 
 # Get transactions
 #req = urllib.request.urlopen('https://api.etherscan.io/api?module=account&action=txlist&address=0x084b1c3c81545d370f3634392de611caabff8148&sort=desc&apikey=7I39Q4ZZ6SER7ZZTKQMNGYHD3UTZ6BSQ32')
