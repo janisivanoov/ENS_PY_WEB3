@@ -45,12 +45,15 @@ else:
 
 cursor =  my_cn.cursor()
 # Functio Reads First block    
+
 def getBlock():
     #read block number
-    q_block = "SELECT block from ens.block"
+    q_block = "SELECT Max(block) from ens.rev_registry"
     cursor.execute(q_block)
     for (block) in cursor:
         start_block = block
+    if start_block == (None,):
+        start_block = (0,)
     return start_block[0]
 
 # Function updates last blosk
@@ -60,9 +63,9 @@ def updateBlock(block):
     my_cn.commit()
 
 # Function updates reverse registry table
-def updateName(domain, address):
-    i_name = "insert into rev_registry (addr, name) values (%s, %s)"
-    u_name = "update rev_registry set name = %s where addr = %s"
+def updateName(domain, address, block):
+    i_name = "insert into rev_registry (addr, name, block) values (%s, %s, %s)"
+    u_name = "update rev_registry set name = %s, block=%s where addr = %s"
     d_name = "delete from rev_registry where addr = %s"
     if domain == "None":
         # delete name from the registry
@@ -73,11 +76,11 @@ def updateName(domain, address):
         
         try:
             # attempt to insert
-            cursor.execute(i_name, [address, domain])
+            cursor.execute(i_name, [address, domain, block])
         except mysql.connector.Error as err:
             # update if record is there
             if err.errno == 1062:
-                cursor.execute(u_name, [domain, address])
+                cursor.execute(u_name, [domain, block, address])
             else:
                 print (err)
                 quit()
@@ -101,13 +104,13 @@ end_block = tr["result"][-1]["blockNumber"]
 print ("First block: "+ str(getBlock()))
 print ("Last block: "+ str(end_block))
 
-updateBlock(end_block)
+#updateBlock(end_block)
 
 for txh in tr["result"]:
     domain = ns.name(txh["from"])
     print(txh["from"], " --- ", domain, " --- ", txh["blockNumber"])
     # update
-    updateName(str(domain), str(txh["from"]))
+    updateName(str(domain), str(txh["from"]), str(txh["blockNumber"]))
 
 
 
