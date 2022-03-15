@@ -19,10 +19,10 @@ print ("ENS-Work")
 eth_key = "7I39Q4ZZ6SER7ZZTKQMNGYHD3UTZ6BSQ32"
 eth_contract = "0x084b1c3c81545d370f3634392de611caabff8148"
 my_config = {
-  'user': 'ens_user',
-  'password': 'ens_password',
-  'host': 'localhost',
-  'database': 'ens',
+  'user': '*****',
+  'password': '*****',
+  'host': '*****',
+  'database': '*****',
   'raise_on_warnings': True
 }
 
